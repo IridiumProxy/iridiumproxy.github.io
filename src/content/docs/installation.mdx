@@ -2,13 +2,40 @@
 title: Installation
 ---
 
+import { Code } from '@astrojs/starlight/components';
+
+export const dockerCompose = `services:
+  iridium:
+    image: ghcr.io/iridiumproxy/iridium:latest
+    container_name: iridium
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./iridium-data:/root/.iridium
+`;
+
 This page will guide you through the installation process for Iridium.
 
 To check that you have the latest version of Iridium, you can run `iridium --version` in your terminal.
 
 ## Docker
 
-One of the easiest ways to get started with Iridium is by using Docker.
+You can run Iridium using Docker with the following command:
+
+```bash
+docker run -d \
+  -p 8080:8080 \
+  -v ./iridium-data:/root/.iridium \
+  --name iridium \
+  ghcr.io/iridiumproxy/iridium:latest
+```
+
+### Docker Compose
+
+You can also use Docker Compose to set up Iridium. Create a `docker-compose.yml` file with the following content:
+
+<Code lang="yaml" code={dockerCompose} title="docker-compose.yml" />
 
 ## Prebuilt Binaries
 
