@@ -12,7 +12,8 @@ Iridium provides several built-in variables that can be used within host configu
 $user_agent     # The User-Agent string from the client's request headers.
 $remote_addr    # The IP address of the client making the request.
 $host           # The Host header from the client's request.
-$uri            # The request URI (path and query string).
+$path           # The path of the request (e.g., /index.html).
+$query_string   # The query string of the request (e.g., ?id=123).
 $method         # The HTTP method of the request (e.g., GET, POST).
 $scheme         # The scheme of the request (http or https).
 `} lang="bash" title="Available Variables" />
