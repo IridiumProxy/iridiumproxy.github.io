@@ -13,7 +13,7 @@ Because edge caching stores files in memory, make sure your server has enough RA
   When Edge Caching is enabled, Iridium will automatically add a `X-Cache: HIT` or a `X-Cache: MISS` header to the response, indicating whether the response was served from the cache or not.
 </Aside>
 
-### Caching Time
+## Caching Time
 
 If not specified, the caching time will be taken from the `Cache-Control` header of the response. If the header is not present, a default caching time of 1 hour (3600 seconds) will be used.
 
