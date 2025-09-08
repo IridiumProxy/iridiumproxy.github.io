@@ -1,0 +1,24 @@
+---
+title: Edge Cache
+description: "Learn about Iridium's built-in edge caching capabilities to improve performance and reduce latency."
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Iridium supports edge caching for static files. You can enable edge caching in the configuration file by setting the `edge_cache.enabled` option to `true`. This option can be applied globally or per host.
+
+Because edge caching stores files in memory, make sure your server has enough RAM to handle the cached files.
+
+<Aside type="tip">
+  When Edge Caching is enabled, Iridium will automatically add a `X-Cache: HIT` or a `X-Cache: MISS` header to the response, indicating whether the response was served from the cache or not.
+</Aside>
+
+### Caching Time
+
+If not specified, the caching time will be taken from the `Cache-Control` header of the response. If the header is not present, a default caching time of 1 hour (3600 seconds) will be used.
+
+This can be configured in the `edge_cache.duration` option in the configuration file (in seconds).
+
+## Clearing the Cache
+
+You can clear the entire edge cache by restarting the Iridium server.

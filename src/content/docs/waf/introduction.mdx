@@ -1,0 +1,45 @@
+---
+title: "WAF: Introduction"
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Iridium includes a built-in Web Application Firewall (WAF) that helps protect your web applications from common threats and vulnerabilities. The WAF can be configured to block or allow specific types of traffic based on predefined rules.
+
+## Key Features
+
+- **Blocking User-Agents**: You can block requests from specific User-Agent strings to prevent access from known malicious bots or crawlers.
+- **Rate Limiting**: The WAF can limit the number of requests from a single IP address within a specified time frame.
+- **Blocking IPs/CIDRs**: You can block requests from specific IP addresses (`1.2.3.4`) or CIDR ranges (`1.2.3.0/24`) to prevent access from known malicious sources.
+
+
+### Blocking User Agents
+
+**Iridium can block requests based on the `User-Agent` header.** For simplicity, you can block pre-defined libraries, tools, and crawlers by using the `block_libraries` or `block_crawlers` options.
+
+The `block_empty_ua` option can be used to block requests with an empty `User-Agent` header.
+
+### VPN/Proxy Blocking
+
+Iridium can block requests from:
+- known VPNs using the `block_vpns` option,
+- known public proxies using the `block_proxies` option,
+- known Tor exit nodes using the `block_tor` option.
+
+These options use public lists to determine if an IP is a VPN, proxy, or Tor exit node.
+
+### Blocking Specific IPs or Ranges
+
+You can block specific IPs or ranges using the `blocked_ips` option. You can specify individual IPs (`1.2.3.4`) or CIDR ranges (`1.2.3.0/24`).
+
+### Rate Limiting
+
+To prevent abuse, you can enable rate limiting using the `rate_limit` option. This option limits the number of requests per IP per second. If an IP exceeds the limit, it will receive a `429 Too Many Requests` response.
+
+### Blocked Responses
+
+When a request is blocked by the WAF, by default, Iridium will return a `403 Forbidden` response.
+
+#### Serving a Captcha
+
+<LinkCard href="/waf/captcha/" title="Captcha Protection" description="Learn how to serve a captcha page for blocked requests instead of a 403 response." icon="shield-check" />
