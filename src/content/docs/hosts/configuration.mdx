@@ -1,0 +1,33 @@
+---
+title: Host Configuration
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+**Iridium manages hosts through configuration files, stored in the `~/.iridium/hosts/` directory (or `%APPDATA%\Iridium\hosts\` on Windows).**
+
+Each host configuration file is a YAML file with a `.yml` extension.
+
+## Configuration File Structure
+
+A host configuration file typically includes the following fields:
+
+<Code code={`
+domain: example.com
+locations:
+  - match: '*'
+    proxy: localhost:3000
+
+edge_cache:
+  enabled: true
+`} lang="yaml" title="hosts/example-host.yml" />
+
+### Fields
+
+- `domain`: The domain name for the host (e.g., `example.com`). Matches with the `Host` header in incoming requests.
+- `locations`: A list of location blocks that define how to handle requests based on their path.
+  - `match`: A pattern to match the request path (e.g., `*` for all paths, `/api/*` for API routes).
+  - `proxy` (optional): The backend service to which requests matching this location should be forwarded (e.g., `localhost:3000`).
+  - `root` (optional): The directory from which to serve static files for this location (e.g., `/var/www/html`).
+  - `content` (optional): Inline content to serve for this location (e.g., `Hello, World!`).
+- `edge_cache`: Configuration for edge caching. See [Edge Caching](/edge-cache/introduction) for more details.

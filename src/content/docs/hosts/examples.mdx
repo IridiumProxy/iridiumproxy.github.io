@@ -1,0 +1,82 @@
+---
+title: Hosts Example
+---
+
+import { Code, Aside } from '@astrojs/starlight/components';
+
+## Serving files from a specific directory
+
+For this example, we will configure a host to serve files from the `/var/www/uploads` directory for requests to `uploads.example.com`.
+
+<Code code={`
+domain: uploads.example.com
+locations:
+  - match: '/images/*'
+    root: /var/www/uploads/images
+  - match: '/videos/*'
+    root: /var/www/uploads/videos
+  - match: '*'
+    content: '404 Not Found. The requested resource was not found.'
+`} lang="yaml" title="hosts/uploads.yml" />
+
+With this configuration:
+- Requests to `uploads.example.com/images/*` will serve files from the `/var/www/uploads/images` directory.
+- Requests to `uploads.example.com/videos/*` will serve files from the `/var/www/uploads/videos` directory.
+- All other requests will return a *404 Not Found* message.
+
+## Proxying requests to a backend service
+
+In this example, we will set up a host to proxy requests to a backend service running on `localhost:3000` for the domain `api.example.com`.
+
+<Code code={`
+domain: api.example.com
+locations:
+  - match: '*'
+    proxy: localhost:3000
+`} lang="yaml" title="hosts/api.yml" />
+
+All requests to `api.example.com` will be forwarded to the backend service at `localhost:3000`.
+
+<Aside type="caution">
+  If Iridium is unable to reach the specified server, it will return a `502 Bad Gateway` error to the client. Ensure that the backend service is running and accessible from the Iridium server.
+</Aside>
+
+## Serving static content with a fallback
+
+This example demonstrates how to serve static content for a specific path and provide a fallback message for all other requests.
+
+<Code code={`
+domain: example.com
+locations:
+  - match: '/welcome'
+    content: 'Welcome to Static Example! This text is served directly from the host configuration, and does not require a backend server or static files.'
+  - match: '/info'
+    content: 'Your user agent is: $user_agent. Your IP address is: $remote_addr'
+  - match: '*'
+    content: 'Please visit /welcome for a welcome message!'
+`} lang="yaml" title="hosts/static.yml" />
+
+With this configuration:
+- Requests to `example.com/welcome` will return the welcome message.
+- Requests to `example.com/info` will return a message containing the user's `User-Agent` and IP address.
+- All other requests will return a prompt to visit `/welcome`.
+
+## Combining static content and proxying
+
+This example combines serving static content and proxying requests to different backend services based on the request path.
+
+<Code code={`
+domain: example.com
+locations:
+  - match: '/static/*'
+    root: /var/www/static
+  - match: '/api/*'
+    proxy: localhost:3000
+  - match: '*'
+    proxy: localhost:8000
+`} lang="yaml" title="hosts/combined.yml" />
+
+With this configuration:
+- Requests to `example.com/static/*` will serve files from the `/var/www/static` directory.
+- Requests to `example.com/api/*` will be proxied to the backend service at `localhost:3000`.
+- All other requests will be proxied to the backend service at `localhost:8000`.

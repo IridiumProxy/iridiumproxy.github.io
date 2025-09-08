@@ -1,0 +1,31 @@
+---
+title: Variables
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+## Available Variables
+
+Iridium provides several built-in variables that can be used within host configuration files to customize responses and behavior. These variables can be included in the `content` field of a location block to dynamically insert information about the request or server.
+
+<Code code={`
+$user_agent     # The User-Agent string from the client's request headers.
+$remote_addr    # The IP address of the client making the request.
+$host           # The Host header from the client's request.
+$uri            # The request URI (path and query string).
+$method         # The HTTP method of the request (e.g., GET, POST).
+$scheme         # The scheme of the request (http or https).
+`} lang="bash" title="Available Variables" />
+
+### Example Usage
+
+Here is an example of how to use these variables in a host configuration file:
+
+<Code code={`
+domain: example.com
+locations:
+  - match: '/user-agent'
+    content: 'Your user agent is: <code>$user_agent</code>'
+  - match: '/ip'
+    content: 'Your IP address is: <code>$remote_addr</code>'
+`} lang="yaml" title="hosts/variables-example.yml" />

@@ -17,6 +17,14 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Hosts',
+					items: [
+						{ label: 'Hosts Configuration', slug: 'hosts/configuration' },
+						{ label: 'Examples', slug: 'hosts/examples' },
+						{ label: 'Variables', slug: 'hosts/variables' },
+					],
+				},
+				{
 					label: 'Edge Cache',
 					items: [
 						{ label: 'Introduction', slug: 'edge-cache/introduction' },
