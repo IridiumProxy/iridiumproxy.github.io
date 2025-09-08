@@ -25,6 +25,12 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'TLS',
+					items: [
+						{ label: 'Introduction', slug: 'tls/introduction' },
+					],
+				},
+				{
 					label: 'Edge Cache',
 					items: [
 						{ label: 'Introduction', slug: 'edge-cache/introduction' },

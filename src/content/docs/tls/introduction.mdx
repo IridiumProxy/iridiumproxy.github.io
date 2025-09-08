@@ -1,0 +1,30 @@
+---
+title: TLS Configuration
+---
+
+import { Code, Aside } from '@astrojs/starlight/components';
+
+To secure your website and ensure data integrity, it's essential to configure TLS (Transport Layer Security) properly. This guide will walk you through the steps to set up TLS for Iridium.
+
+## Obtaining a Certificate
+
+To enable TLS, you need a valid and trusted TLS certificate. You can obtain a free TLS certificate from [Let's Encrypt](https://letsencrypt.org/) or purchase one from a trusted Certificate Authority (CA).
+
+## Configuring TLS
+
+Here's how to configure TLS in your Iridium setup:
+
+<Code lang="yaml" title="config.yaml" code={`
+tls:
+    cert_file: /path/to/the/fullchain.pem
+    key_file: /path/to/the/privkey.pem
+`} />
+
+- `cert_file`: This should point to the full chain certificate file provided by your CA. It typically includes your domain's certificate along with any intermediate certificates.
+- `key_file`: This should point to the private key file associated with your TLS certificate.
+
+<Aside type="note">
+  If Iridium is unable to read the certificate or key files (permission issues, incorrect paths, etc.), it will fail to start. Ensure that Iridium has the necessary permissions to access them.
+
+  If the files do not exist or are empty, Iridium will start normally but without TLS support.
+</Aside>
