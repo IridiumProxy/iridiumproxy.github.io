@@ -1,0 +1,46 @@
+---
+title: Obtaining a TLS Certificate
+---
+
+import { Code, Aside } from '@astrojs/starlight/components';
+
+To enable TLS, you need a valid and trusted TLS certificate. You can obtain a free TLS certificate from [Let's Encrypt](https://letsencrypt.org/) or purchase one from a trusted Certificate Authority (CA).
+
+Fortunately, Iridium includes built-in support to generate certificates.
+
+## Self-signed certificate
+
+You can generate a self-signed certificate using the following command:
+
+```bash
+iridium cert generate example.com
+```
+
+This command will generate two files in the current directory, `example.com.crt` (the certificate) and `example.com.key` (the private key).
+
+<Aside type="caution">
+  Self-signed certificates are not trusted by browsers and will result in security warnings. They are suitable for testing or internal use but not recommended for production environments.
+</Aside>
+
+## Let's Encrypt
+
+Iridium also includes built-in support for obtaining and renewing certificates from Let's Encrypt. To use this feature, run the following command:
+
+```bash
+iridium cert obtain example.com
+```
+
+This command will generate two files in the current directory, `example.com.crt` (the certificate) and `example.com.key` (the private key).
+
+## Certificate Configuration
+
+Once you have obtained your TLS certificate and private key, you need to configure Iridium to use them. Update your `config.yaml` file with the paths to your certificate and key files:
+
+<Code lang="yaml" title="config.yaml" code={`
+tls:
+    cert_file: /path/to/the/certificate.crt
+    key_file: /path/to/the/private.key
+`} />
+
+- `cert_file`: This should point to the full chain certificate file provided by your CA. It typically includes your domain's certificate along with any intermediate certificates.
+- `key_file`: This should point to the private key file associated with your TLS certificate.

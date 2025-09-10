@@ -1,56 +1,14 @@
 ---
-title: TLS Configuration
+title: TLS (Transport Layer Security)
 ---
 
-import { Code, Aside } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
 
-To secure your website and ensure data integrity, it's essential to configure TLS (Transport Layer Security) properly. This guide will walk you through the steps to set up TLS for Iridium.
+**To secure your website and ensure data integrity, it's essential to configure TLS (Transport Layer Security) properly, which makes HTTPS possible.** TLS encrypts the data transmitted between the client and server, protecting it from eavesdropping and tampering.
 
-## Obtaining a Certificate
+## Getting Started
 
-To enable TLS, you need a valid and trusted TLS certificate. You can obtain a free TLS certificate from [Let's Encrypt](https://letsencrypt.org/) or purchase one from a trusted Certificate Authority (CA).
-
-Fortunately, Iridium includes built-in support to generate certificates.
-
-### Obtaining a self-signed certificate
-
-You can generate a self-signed certificate using the following command:
-
-```bash
-iridium cert generate example.com
-```
-
-This command will generate two files in the current directory, `example.com.crt` (the certificate) and `example.com.key` (the private key).
-
-<Aside type="caution">
-  Self-signed certificates are not trusted by browsers and will result in security warnings. They are suitable for testing or internal use but not recommended for production environments.
-</Aside>
-
-### Obtaining a certificate from Let's Encrypt
-
-Iridium also includes built-in support for obtaining and renewing certificates from Let's Encrypt. To use this feature, run the following command:
-
-```bash
-iridium cert obtain example.com
-```
-
-This command will generate two files in the current directory, `example.com.crt` (the certificate) and `example.com.key` (the private key).
-
-## Configuring TLS
-
-Here's how to configure TLS in your Iridium setup:
-
-<Code lang="yaml" title="config.yaml" code={`
-tls:
-    cert_file: /path/to/the/certificate.crt
-    key_file: /path/to/the/private.key
-`} />
-
-- `cert_file`: This should point to the full chain certificate file provided by your CA. It typically includes your domain's certificate along with any intermediate certificates.
-- `key_file`: This should point to the private key file associated with your TLS certificate.
-
-<Aside type="note">
-  If Iridium is unable to read the certificate or key files (permission issues, incorrect paths, etc.), it will fail to start. Ensure that Iridium has the necessary permissions to access them.
-
-  If the files do not exist or are empty, Iridium will start normally but without TLS support.
-</Aside>
+<LinkCard
+  href="/tls/obtaining-certificate/" title="Obtaining a Certificate"
+  description="Learn how to obtain a TLS certificate for your domain."
+/>

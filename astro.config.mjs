@@ -28,6 +28,7 @@ export default defineConfig({
 					label: 'TLS',
 					items: [
 						{ label: 'Introduction', slug: 'tls/introduction' },
+						{ label: 'Obtaining a Certificate', slug: 'tls/obtaining-certificate' },
 						{ label: 'HTTPS Redirection', slug: 'tls/https-redirection' },
 					],
 				},
