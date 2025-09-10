@@ -28,6 +28,13 @@ export default defineConfig({
 					label: 'TLS',
 					items: [
 						{ label: 'Introduction', slug: 'tls/introduction' },
+						{ label: 'HTTPS Redirection', slug: 'tls/https-redirection' },
+					],
+				},
+				{
+					label: 'HTTP/2',
+					items: [
+						{ label: 'Introduction', slug: 'http2/introduction' },
 					],
 				},
 				{
