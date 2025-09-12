@@ -4,16 +4,17 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://iridiumproxy.github.io',
 	integrations: [
 		starlight({
 			title: 'Iridium',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/IridiumProxy/iridiumproxy.github.io' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/IridiumProxy' }],
 			sidebar: [
 				{
 					label: 'Introduction',
 					items: [
-						{label: 'Getting Started', slug: 'getting-started'},
-						{label: 'Installation', slug: 'installation'},
+						{ label: 'Getting Started', slug: 'getting-started' },
+						{ label: 'Installation', slug: 'installation' },
 					],
 				},
 				{
